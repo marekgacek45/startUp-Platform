@@ -1,38 +1,13 @@
 import SearchForm from '@/components/SearchForm'
-import StartupCard from '@/components/StartupCard'
+import StartupCard, { StartupCardType } from '@/components/StartupCard'
+import { client } from '@/sanity/lib/client'
+import { STARTUPS_QUERY } from '@/sanity/lib/queries'
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ query?: string }> }) {
 	const query = (await searchParams).query
 
-	const posts = [
-		{_id:1,
-			_createdAt:new Date(),
-			views:55,
-			author:{_id:1,name:"Donald Kaczka"},
-			description:"This is a description",
-			title:"This is a title",
-			category:"This is a category",
-			image:"https://picsum.photos/600/600",
-		},
-		{_id:2,
-			_createdAt:new Date(),
-			views:55,
-			author:{_id:1,name:"Donald Kaczka"},
-			description:"This is a description",
-			title:"This is a title",
-			category:"This is a category",
-			image:"https://picsum.photos/600/600",
-		},
-		{_id:3,
-			_createdAt:new Date(),
-			views:55,
-			author:{_id:1,name:"Donald Kaczka"},
-			description:"This is a description",
-			title:"This is a title",
-			category:"This is a category",
-			image:"https://picsum.photos/600/600",
-		},
-	]
+	const posts = await client.fetch(STARTUPS_QUERY)
+
 
 	return (
 		<>
