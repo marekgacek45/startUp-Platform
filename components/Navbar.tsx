@@ -1,4 +1,5 @@
 import { auth, signOut, signIn } from '@/auth'
+import { LogOut, PencilIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -19,7 +20,8 @@ const Navbar = async () => {
 					{session && session?.user ? (
 						<>
 							<Link href='/startup/create'>
-								<span>Create</span>
+								<span className='max-sm:hidden'>Create</span>
+								<PencilIcon className='size-6 sm:hidden text-red-400'/>
 							</Link>
 
 							<button
@@ -27,7 +29,8 @@ const Navbar = async () => {
 									'use server'
 									await signOut({redirectTo: '/'})
 								}}>
-								<span>Sign out</span>
+								<span className='max-sm:hidden'>Sign out</span>
+								<LogOut className='size-6 sm:hidden text-red-400'/>
 							</button>
 
 							<Link href={`/user/${session?.id}`}>
